@@ -3,6 +3,7 @@ package com.example.weatherapp
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.Button
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -44,6 +45,39 @@ fun MainPage(modifier: Modifier = Modifier) {
             text = "ST: ${st.value}",
             style = MaterialTheme.typography.bodyMedium
         )
+
+        Button(
+            onClick = {
+                ciudad.value = ""
+                temperatura.value = 0
+                descripcion.value = ""
+                st.value = 0
+            }
+        ) {
+            Text(text = "Borrar todo")
+        }
+
+        Button(
+            onClick = {
+                ciudad.value = "CABA"
+                temperatura.value = 10
+                descripcion.value = "Despejado"
+                st.value = 15
+            }
+        ) {
+            Text(text = "CABA")
+        }
+
+        Button(
+            onClick = {
+                ciudad.value = "Cordoba"
+                temperatura.value = 20
+                descripcion.value = "Nublado"
+                st.value = 22
+            }
+        ) {
+            Text(text = "Cordoba")
+        }
     }
 }
 
