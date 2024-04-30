@@ -13,15 +13,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewmodel.compose.viewModel
 import com.example.weatherapp.ui.theme.WeatherAppTheme
 
 @Composable
 fun MainPage(modifier: Modifier = Modifier) {
 
-    val ciudad = remember { mutableStateOf<String>("CABA")}
-    val temperatura = remember { mutableStateOf<Int>(14)}
-    val descripcion = remember { mutableStateOf<String>("Nublado")}
-    val st = remember { mutableStateOf<Int>(13)}
+    val viewModel:MainPageViewModel = viewModel()
 
     Column (
         modifier = modifier
@@ -30,28 +28,25 @@ fun MainPage(modifier: Modifier = Modifier) {
         horizontalAlignment = Alignment.CenterHorizontally
     ){
         Text(
-            text = ciudad.value,
+            text = viewModel.ciudad.value,
             style = MaterialTheme.typography.titleMedium
         )
         Text(
-            text = "T: ${temperatura.value}",
+            text = "T: ${viewModel.temperatura.value}",
                     style = MaterialTheme.typography.titleLarge
         )
         Text(
-            text = descripcion.value,
+            text = viewModel.descripcion.value,
             style = MaterialTheme.typography.bodyMedium
         )
         Text(
-            text = "ST: ${st.value}",
+            text = "ST: ${viewModel.st.value}",
             style = MaterialTheme.typography.bodyMedium
         )
 
         Button(
             onClick = {
-                ciudad.value = ""
-                temperatura.value = 0
-                descripcion.value = ""
-                st.value = 0
+                viewModel.borrarTodo()
             }
         ) {
             Text(text = "Borrar todo")
@@ -59,10 +54,7 @@ fun MainPage(modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
-                ciudad.value = "CABA"
-                temperatura.value = 10
-                descripcion.value = "Despejado"
-                st.value = 15
+                viewModel.mostrarCaba()
             }
         ) {
             Text(text = "CABA")
@@ -70,10 +62,7 @@ fun MainPage(modifier: Modifier = Modifier) {
 
         Button(
             onClick = {
-                ciudad.value = "Cordoba"
-                temperatura.value = 20
-                descripcion.value = "Nublado"
-                st.value = 22
+                viewModel.mostrarCordoba()
             }
         ) {
             Text(text = "Cordoba")
